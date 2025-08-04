@@ -17,6 +17,16 @@ pala1.shapesize(stretch_wid=5, stretch_len=1)
 pala1.penup()
 pala1.goto(-350, 0)
 
+pala2 = turtle.Turtle()
+pala2.speed(0)
+pala2.shape("square")
+pala2.color("white")
+pala2.shapesize(stretch_wid=5, stretch_len=1)
+pala2.penup()
+pala2.goto(350, 0)
+
+
+
 while True:
   wn.update()
   
