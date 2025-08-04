@@ -43,7 +43,7 @@ punt.color("white")
 punt.penup()
 punt.hideturtle()
 punt.goto(0, 260)
-punt.write("Jugador 1: 0 Jugador 2: 0", align="center", font=("Courier", 24, "normal"))
+punt.write("Jugador 1:    0 Jugador 2: 0", align="center", font=("Courier", 24, "normal"))
 
 # Funció per moure les pales
 def pala1_amunt():
@@ -94,10 +94,12 @@ while True:
   if bola.xcor() > 380:
       bola.setx(380)
       bola.dx *= -1
+      puntuacio1 += 1
 
   if bola.xcor() < -390:
       bola.setx(-390)
       bola.dx *= -1
+      puntuacio2 += 1
 
 
   # Xocs entre pala i bola
