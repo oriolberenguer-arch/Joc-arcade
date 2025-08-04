@@ -31,8 +31,8 @@ bola.shape("square")
 bola.color("white")
 bola.penup()
 bola.goto(0, 0)
-bola.dx = 2
-bola.dy = 2
+bola.dx = 3
+bola.dy = 3
 
 # Puntuació
 puntuacio1 = 0
@@ -96,29 +96,32 @@ while True:
       bola.dx *= -1
       puntuacio1 += 1
       punt.clear()
-      punt.write("Jugador 1:{}          Jugador 2: {}".format(puntuacio1, puntuacio2), align="center", font=("Courier", 24, "normal"))
+      punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2), align="center", font=("Courier", 24, "normal"))
+      bola.goto(0,0)
   if bola.xcor() < -390:
       bola.setx(-390)
       bola.dx *= -1
-      puntuacio1 += 1
+      puntuacio2 += 1
       punt.clear()
-      punt.write("Jugador 1:{}          Jugador 2: {}".format(puntuacio1, puntuacio2), align="center", font=("Courier", 24, "normal"))
+      punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2), align="center", font=("Courier", 24, "normal"))
+      bola.goto(0,0)
+
 
 
   # Xocs entre pala i bola
   if bola.xcor() < -330 and bola.ycor() < (pala1.ycor() + 50) and bola.ycor() > (pala1.ycor() - 50):
       if bola.dx > 0:
-          bola.dx += 1.5
+          bola.dx += 1
       else:
-          bola.dx -= 1.5
+          bola.dx -= 1
       bola.dx *= -1
       bola.setx(-330)
 
   elif bola.xcor() > 330 and bola.ycor() < (pala2.ycor() + 50) and bola.ycor() > (pala2.ycor() - 50):
       if bola.dx > 0:
-          bola.dx += 1.5
+          bola.dx += 1
       else:
-          bola.dx -= 1.5
+          bola.dx -= 1
       bola.dx *= -1
       bola.setx(330)
   
