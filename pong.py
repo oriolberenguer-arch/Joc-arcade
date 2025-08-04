@@ -34,9 +34,10 @@ bola.goto(0, 0)
 
 # Funció per moure les pales
 def pala1_amunt():
-  y = pala1.ycor()
-  y += 20
-  pala1.sety(y)
+  if y <= 300:
+    y = pala1.ycor()
+    y += 20
+    pala1.sety(y)
 
 wn.listen()
 wn.onkeypress(pala1_amunt, "w")
