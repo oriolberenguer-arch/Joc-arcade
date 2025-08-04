@@ -1,11 +1,12 @@
+# Importem la llibreria 
 import turtle
 import os
 
 wn = turtle.Screen()
 wn.title("Pong")
 wn.bgcolor("black")
-wn.setup(width=800, height=600)
-wn.trace(0)
+wn._root.attributes('-fullscreen', True)
+
 
 
 while True:
