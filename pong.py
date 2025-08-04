@@ -83,64 +83,63 @@ while True:
   bola.setx(bola.xcor() + bola.dx)
   bola.sety(bola.ycor() + bola.dy)
 
-    while x:
-      if bola.ycor() > 290:
-          bola.sety(290)
-          bola.dy *= -1
-    
-      if bola.ycor() < -280:
-          bola.sety(-280)
-          bola.dy *= -1
-    
-      if bola.xcor() > 380:
-          bola.setx(380)
-          bola.dx *= -1
-          puntuacio1 += 1
-          punt.clear()
-          punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2), align="center", font=("Courier", 24, "normal"))
-          bola.goto(0,0)
-      if bola.xcor() < -390:
-          bola.setx(-390)
-          bola.dx *= -1
-          puntuacio2 += 1
-          punt.clear()
-          punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2), align="center", font=("Courier", 24, "normal"))
-          bola.goto(0,0)
-    
-    
-          punt = turtle.Turtle()
-          punt.speed(0)
-          punt.color("white")
-          punt.penup()
-          punt.hideturtle()
-          punt.goto(0, 0)
-      if puntuacio1 == puntuacio_max or puntuacio2 == puntuacio_max:
-          x = False
+  if bola.ycor() > 290:
+      bola.sety(290)
+      bola.dy *= -1
 
-    
-    
-      # Xocs entre pala i bola
-      if bola.xcor() < -330 and bola.ycor() < (pala1.ycor() + 50) and bola.ycor() > (pala1.ycor() - 50):
-          if bola.dx > 0:
-              bola.dx += 1
-          else:
-              bola.dx -= 1
-          bola.dx *= -1
-          bola.setx(-330)
-    
-      elif bola.xcor() > 330 and bola.ycor() < (pala2.ycor() + 50) and bola.ycor() > (pala2.ycor() - 50):
-          if bola.dx > 0:
-              bola.dx += 1
-          else:
-              bola.dx -= 1
-          bola.dx *= -1
-          bola.setx(330)
+  if bola.ycor() < -280:
+      bola.sety(-280)
+      bola.dy *= -1
+
+  if bola.xcor() > 380:
+      bola.setx(380)
+      bola.dx *= -1
+      puntuacio1 += 1
+      punt.clear()
+      punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2), align="center", font=("Courier", 24, "normal"))
+      bola.goto(0,0)
+  if bola.xcor() < -390:
+      bola.setx(-390)
+      bola.dx *= -1
+      puntuacio2 += 1
+      punt.clear()
+      punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2), align="center", font=("Courier", 24, "normal"))
+      bola.goto(0,0)
+
+
+      punt = turtle.Turtle()
+      punt.speed(0)
+      punt.color("white")
+      punt.penup()
+      punt.hideturtle()
+      punt.goto(0, 0)
+  if puntuacio1 == puntuacio_max or puntuacio2 == puntuacio_max:
+      x = False
+
+
+
+  # Xocs entre pala i bola
+  if bola.xcor() < -330 and bola.ycor() < (pala1.ycor() + 50) and bola.ycor() > (pala1.ycor() - 50):
+      if bola.dx > 0:
+          bola.dx += 1
+      else:
+          bola.dx -= 1
+      bola.dx *= -1
+      bola.setx(-330)
+
+  elif bola.xcor() > 330 and bola.ycor() < (pala2.ycor() + 50) and bola.ycor() > (pala2.ycor() - 50):
+      if bola.dx > 0:
+          bola.dx += 1
+      else:
+          bola.dx -= 1
+      bola.dx *= -1
+      bola.setx(330)
+  
+if x == False:
+    if puntuacio1 == puntuacio_max:
+        punt.write("JUGADOR 1 GUANYADOR", align="center", font=("Courier", 48, "normal"))
+    if puntuacio2 == puntuacio_max:
+        punt.write("JUGADOR 2 GUANYADOR", align="center", font=("Courier", 48, "normal"))
       
-    if x = = False:
-        if puntuacio1 == puntuacio_max:
-            punt.write("JUGADOR 1 GUANYADOR", align="center", font=("Courier", 48, "normal"))
-        if puntuacio2 == puntuacio_max:
-            punt.write("JUGADOR 2 GUANYADOR", align="center", font=("Courier", 48, "normal"))
-          
-    
-      
+
+  
