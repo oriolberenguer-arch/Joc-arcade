@@ -95,7 +95,7 @@ while True:
       bola.dx *= -1
 
   if (bola.xcor() < -340 and bola.xcor() > -350) and (bola.ycor() < pala2.ycor() + 40 and bola.ycor() > pala1.ycor - 40):
-      ball.setx(340)
+      ball.setx(-340)
       bola.dx *= -1
 
       
