@@ -72,5 +72,20 @@ while True:
   bola.sety(bola.ycor() + bola.dy)
 
 
+  if bola.ycor() > 260:
+      bola.sety(260)
+      bola.dy *= -1
+
+  if bola.ycor() < -260:
+      bola.sety(-260)
+      bola.dy *= -1
+
+  if bola.xcor() > 360:
+      bola.setx(360)
+      bola.dx *= -1
+
+  if bola.xcor() < -360:
+      bola.setx(-360)
+      bola.dx *= -1
 
   
