@@ -39,8 +39,16 @@ def pala1_amunt():
       y += 20
       pala1.sety(y)
 
+def pala1_avall():
+    y = pala1.ycor()
+    if y > -260: # el numero 260 haura de canviar segons la pantalla
+      y -= 20
+      pala1.sety(y)
+
 wn.listen()
 wn.onkeypress(pala1_amunt, "w")
+wn.onkeypress(pala1_avall, "s")
+
 
 while True:
   wn.update()
