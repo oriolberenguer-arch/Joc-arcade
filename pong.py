@@ -68,8 +68,8 @@ wn.onkeypress(pala2_avall, "Down")
 
 while True:
   wn.update()
-    bola.setx(bola.xcor() + bola.dx)
-    bola.sety(bola.ycor() + bola.dy)
+  bola.setx(bola.xcor() + bola.dx)
+  bola.sety(bola.ycor() + bola.dy)
 
 
 
