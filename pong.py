@@ -13,7 +13,7 @@ pala1 = turtle.Turtle()
 pala1.speed(0)
 pala1.shape("square")
 pala1.color("white")
-pala1.shapesize(stretch_wid=5, stretch_len=1)
+pala1.shapesize(stretch_wid=5, stretch_len=0.5)
 pala1.penup()
 pala1.goto(-350, 0)
 
@@ -21,7 +21,7 @@ pala2 = turtle.Turtle()
 pala2.speed(0)
 pala2.shape("square")
 pala2.color("white")
-pala2.shapesize(stretch_wid=5, stretch_len=1)
+pala2.shapesize(stretch_wid=5, stretch_len=0.5)
 pala2.penup()
 pala2.goto(350, 0)
 
@@ -37,6 +37,7 @@ bola.dy = 3
 # Puntuació
 puntuacio1 = 0
 puntuacio2 = 0
+puntuacio_max = 3
 punt = turtle.Turtle()
 punt.speed(0)
 punt.color("white")
@@ -106,6 +107,18 @@ while True:
       punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2), align="center", font=("Courier", 24, "normal"))
       bola.goto(0,0)
 
+
+      punt = turtle.Turtle()
+      punt.speed(0)
+      punt.color("white")
+      punt.penup()
+      punt.hideturtle()
+      punt.goto(0, 0)
+  if puntuacio1 = puntuacio_max:
+      punt.write("JUGADOR 1 GUANYADOR", align="center", font=("Courier", 48, "normal"))
+
+  elif puntuacio2 = puntuacio_max:
+      punt.write("JUGADOR 2 GUANYADOR", align="center", font=("Courier", 48, "normal"))
 
 
   # Xocs entre pala i bola
