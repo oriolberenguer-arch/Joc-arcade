@@ -77,8 +77,8 @@ wn.onkeypress(pala1_avall, "s")
 wn.onkeypress(pala2_amunt, "Up")
 wn.onkeypress(pala2_avall, "Down")
 
-
-while True:
+x = True
+while x:
   wn.update()
   bola.setx(bola.xcor() + bola.dx)
   bola.sety(bola.ycor() + bola.dy)
@@ -114,11 +114,13 @@ while True:
       punt.penup()
       punt.hideturtle()
       punt.goto(0, 0)
-  if puntuacio1 = puntuacio_max:
+  if puntuacio1 == puntuacio_max:
       punt.write("JUGADOR 1 GUANYADOR", align="center", font=("Courier", 48, "normal"))
+      x = False
 
-  elif puntuacio2 = puntuacio_max:
+  elif puntuacio2 == puntuacio_max:
       punt.write("JUGADOR 2 GUANYADOR", align="center", font=("Courier", 48, "normal"))
+      x = False
 
 
   # Xocs entre pala i bola
