@@ -43,7 +43,7 @@ punt.color("white")
 punt.penup()
 punt.hideturtle()
 punt.goto(0, 260)
-punt.write("Jugador 1:    0 Jugador 2: 0", align="center", font=("Courier", 24, "normal"))
+punt.write("Jugador 1: 0          Jugador 2: 0", align="center", font=("Courier", 24, "normal"))
 
 # Funció per moure les pales
 def pala1_amunt():
