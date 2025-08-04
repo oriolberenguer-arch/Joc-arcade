@@ -8,7 +8,7 @@ wn.bgcolor("black")
 wn.setup(width=800, height=600) # línia provisional
 # codi real--> wn._root.attributes('-fullscreen', True)
 
-# Configuració pales
+# Configuració pales i pilota
 pala1 = turtle.Turtle()
 pala1.speed(0)
 pala1.shape("square")
@@ -25,7 +25,12 @@ pala2.shapesize(stretch_wid=5, stretch_len=1)
 pala2.penup()
 pala2.goto(350, 0)
 
-
+bola = turtle.Turtle()
+bola.speed(0)
+bola.shape("square")
+bola.color("white")
+bola.penup()
+bola.goto(0, 0)
 
 while True:
   wn.update()
