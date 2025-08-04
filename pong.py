@@ -46,13 +46,13 @@ def pala1_avall():
       pala1.sety(y)
 
 def pala2_amunt():
-    y = pala1.ycor()
+    y = pala2.ycor()
     if y < 260: 
       y += 20
       pala2.sety(y)
 
 def pala2_avall():
-    y = pala1.ycor()
+    y = pala2.ycor()
     if y > -240: 
       y -= 20
       pala2.sety(y)
