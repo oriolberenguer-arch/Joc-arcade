@@ -1,1 +1,2 @@
-hola
+import turle
+import os
