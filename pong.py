@@ -90,13 +90,13 @@ while True:
 
 
   # Xocs entre pala i bola
-  if (bola.xcor() > 340 and bola.xcor() < 350) and (bola.ycor() < pala2.ycor() + 40 and bola.ycor() > pala2.ycor - 40):
-      ball.setx(340)
+    if bola.xcor() < -340 and bola.ycor() < pala1.ycor() + 50 and bola.ycor() > pala1.ycor() - 50:
+      bola.dx *= -1
+    
+  elif bola.xcor() > 340 and bola.ycor() < pala2.ycor() + 50 and bola.ycor() > pala2.ycor() - 50:
       bola.dx *= -1
 
-  if (bola.xcor() < -340 and bola.xcor() > -350) and (bola.ycor() < pala2.ycor() + 40 and bola.ycor() > pala1.ycor - 40):
-      ball.setx(-340)
-      bola.dx *= -1
+  
 
       
 
