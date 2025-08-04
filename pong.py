@@ -31,6 +31,8 @@ bola.shape("square")
 bola.color("white")
 bola.penup()
 bola.goto(0, 0)
+bola.dx = 2
+bola.dy = 2
 
 # Funció per moure les pales
 def pala1_amunt():
@@ -66,4 +68,9 @@ wn.onkeypress(pala2_avall, "Down")
 
 while True:
   wn.update()
+    bola.setx(bola.xcor() + bola.dx)
+    bola.sety(bola.ycor() + bola.dy)
+
+
+
   
