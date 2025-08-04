@@ -34,6 +34,17 @@ bola.goto(0, 0)
 bola.dx = 2
 bola.dy = 2
 
+# Puntuació
+puntuacio1 = 0
+puntuacio2 = 0
+punt = turtle.Turtle()
+punt.speed(0)
+punt.color("white")
+punt.penup()
+punt.hideturtle()
+punt.goto(0, 260)
+punt.write("Jugador 1: 0 Jugador 2: 0", align="center", font=("Courier", 24, "normal"))
+
 # Funció per moure les pales
 def pala1_amunt():
     y = pala1.ycor()
@@ -92,17 +103,17 @@ while True:
   # Xocs entre pala i bola
   if bola.xcor() < -330 and bola.ycor() < (pala1.ycor() + 50) and bola.ycor() > (pala1.ycor() - 50):
       if bola.dx > 0:
-          bola.dx += 1
+          bola.dx += 1.5
       else:
-          bola.dx -= 1
+          bola.dx -= 1.5
       bola.dx *= -1
       bola.setx(-330)
 
   elif bola.xcor() > 330 and bola.ycor() < (pala2.ycor() + 50) and bola.ycor() > (pala2.ycor() - 50):
       if bola.dx > 0:
-          bola.dx += 1
+          bola.dx += 1.5
       else:
-          bola.dx -= 1
+          bola.dx -= 1.5
       bola.dx *= -1
       bola.setx(330)
   
