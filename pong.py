@@ -35,19 +35,33 @@ bola.goto(0, 0)
 # Funció per moure les pales
 def pala1_amunt():
     y = pala1.ycor()
-    if y < 260: # el numero 260 haura de canviar segons la pantalla
+    if y < 260: # el numero 260 haura de canviar segons la pantalla (i de les altres funcions)
       y += 20
       pala1.sety(y)
 
 def pala1_avall():
     y = pala1.ycor()
-    if y > -260: # el numero 260 haura de canviar segons la pantalla
+    if y > -240: 
       y -= 20
       pala1.sety(y)
+
+def pala2_amunt():
+    y = pala1.ycor()
+    if y < 260: 
+      y += 20
+      pala2.sety(y)
+
+def pala2_avall():
+    y = pala1.ycor()
+    if y > -240: 
+      y -= 20
+      pala2.sety(y)
 
 wn.listen()
 wn.onkeypress(pala1_amunt, "w")
 wn.onkeypress(pala1_avall, "s")
+wn.onkeypress(pala2_amunt, "Up")
+wn.onkeypress(pala2_avall, "Down")
 
 
 while True:
