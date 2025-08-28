@@ -79,6 +79,7 @@ wn.onkeypress(pala2_avall, "Down")
 
 x = True
 while True:
+
   wn.update()
   bola.setx(bola.xcor() + bola.dx)
   bola.sety(bola.ycor() + bola.dy)
@@ -107,15 +108,15 @@ while True:
       bola.goto(0,0)
 
 
-      punt = turtle.Turtle()
-      punt.speed(0)
-      punt.color("white")
-      punt.penup()
-      punt.hideturtle()
-      punt.goto(0, 0)
+      
   if puntuacio1 == puntuacio_max or puntuacio2 == puntuacio_max:
-      x = False
-
+      punt.goto(0, 0)
+      if puntuacio1 == puntuacio_max:
+          punt.write("JUGADOR 1 GUANYADOR", align="center", font=("Courier", 48, "normal"))
+      if puntuacio2 == puntuacio_max:
+          punt.write("JUGADOR 2 GUANYADOR", align="center", font=("Courier", 48, "normal"))
+      bola.dx = 0
+      bola.dy = 0
 
 
   # Xocs entre pala i bola
@@ -135,11 +136,7 @@ while True:
       bola.dx *= -1
       bola.setx(330)
   
-if x == False:
-    if puntuacio1 == puntuacio_max:
-        punt.write("JUGADOR 1 GUANYADOR", align="center", font=("Courier", 48, "normal"))
-    if puntuacio2 == puntuacio_max:
-        punt.write("JUGADOR 2 GUANYADOR", align="center", font=("Courier", 48, "normal"))
       
+
 
   
