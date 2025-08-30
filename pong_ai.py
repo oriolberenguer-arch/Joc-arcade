@@ -1,6 +1,6 @@
 import turtle
-import menu_pong
 import random
+import pong_ai_final
 
 def jugar_pong(puntuacio_max):
     # Configuració de la pantalla
@@ -33,8 +33,8 @@ def jugar_pong(puntuacio_max):
     bola.color("white")
     bola.penup()
     bola.goto(0, 0)
-    bola.dx = 3
-    bola.dy = 3
+    bola.dx = 3.5
+    bola.dy = 3.5
 
     # Puntuació
     puntuacio1 = 0
@@ -87,7 +87,7 @@ def jugar_pong(puntuacio_max):
 
         # Moviment de la IA
         if bola.xcor() > 100:  # Només quan la pilota està a la seva meitat
-            error = random.randint(-20, 20)
+            error = random.randint(-75, 75)
             if bola.ycor() > pala2.ycor() + 10 + error:
                 pala2.sety(pala2.ycor() + 12)
             elif bola.ycor() < pala2.ycor() - 10 + error:
@@ -103,9 +103,16 @@ def jugar_pong(puntuacio_max):
 
         # Punt per jugador 1
         if bola.xcor() > 380:
+            puntuacio1 += 1
             bola.setx(380)
             bola.dx *= -1
-            puntuacio1 += 1
+            # Fem que cada ronda la pilota vagi més ràpida
+            if bola.dx > 0:
+                bola.dx = 3.5 + (puntuacio1 + puntuacio2)/4
+                bola.dy = 3.5 + (puntuacio1 + puntuacio2)/4
+            else:
+                bola.dx = -3.5 - (puntuacio1 + puntuacio2)/4
+                bola.dy = -3.5 - (puntuacio1 + puntuacio2)/4
             punt.clear()
             punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2),
                        align="center", font=("Courier", 24, "normal"))
@@ -113,9 +120,16 @@ def jugar_pong(puntuacio_max):
 
         # Punt per jugador 2
         if bola.xcor() < -390:
+            puntuacio2 += 1
             bola.setx(-390)
             bola.dx *= -1
-            puntuacio2 += 1
+            # Fem que cada ronda la pilota vagi més ràpida
+            if bola.dx > 0:
+                bola.dx = 3.5 + (puntuacio1 + puntuacio2)/4
+                bola.dy = 3.5 + (puntuacio1 + puntuacio2)/4
+            else:
+                bola.dx = -3.5 - (puntuacio1 + puntuacio2)/4
+                bola.dy = -3.5 - (puntuacio1 + puntuacio2)/4
             punt.clear()
             punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2),
                        align="center", font=("Courier", 24, "normal"))
@@ -126,20 +140,21 @@ def jugar_pong(puntuacio_max):
             bola.dx = 0
             bola.dy = 0
             punt.goto(0, 0)
+            wn.clear()
             if puntuacio1 == puntuacio_max:
-                punt.write("JUGADOR 1 GUANYADOR", align="center", font=("Courier", 48, "normal"))
+                pong_ai_final.pantalla_final("1", puntuacio_max)
             else:
-                punt.write("JUGADOR 2 GUANYADOR", align="center", font=("Courier", 48, "normal"))
+                pong_ai_final.pantalla_final("2", puntuacio_max)
             x = False
 
         # Xocs entre pala i bola
         if bola.xcor() < -330 and pala1.ycor() - 50 < bola.ycor() < pala1.ycor() + 50:
-            bola.dx *= -1
+            bola.dx *= -1.15
+            bola.dy *= 1.15
             bola.setx(-330)
 
         elif bola.xcor() > 330 and pala2.ycor() - 50 < bola.ycor() < pala2.ycor() + 50:
-            bola.dx *= -1
+            bola.dx *= -1.15
+            bola.dy *= 1.15            
             bola.setx(330)
 
-    # Manté la finestra oberta després de finalitzar
-    wn.mainloop()
