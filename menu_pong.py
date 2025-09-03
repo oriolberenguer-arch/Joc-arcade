@@ -28,12 +28,12 @@ def crear_menu():
     def jugar_partida_mitjana_normal():
         root.destroy()
         menu = False
-        root.after(100, lambda: pong.jugar_pong(9))
+        root.after(100, lambda: pong.jugar_pong(6))
 
     def jugar_partida_llarga_normal():
         root.destroy()        
         menu = False
-        root.after(100, lambda: pong.jugar_pong(12))
+        root.after(100, lambda: pong.jugar_pong(9))
 
     # Funcions per jugar contra la màquina
     def jugar_partida_curta_maquina():
@@ -45,12 +45,12 @@ def crear_menu():
         root.destroy()        
         menu = False
 
-        root.after(100, lambda: pong_ai.jugar_pong(9))
+        root.after(100, lambda: pong_ai.jugar_pong(6))
 
     def jugar_partida_llarga_maquina():
         root.destroy()        
         menu = False
-        root.after(100, lambda: pong_ai.jugar_pong(12))
+        root.after(100, lambda: pong_ai.jugar_pong(9))
 
     btn_font = ("Courier", 16, "bold")
     btn_bg = "white"
@@ -69,11 +69,11 @@ def crear_menu():
                 bg=btn_bg, fg=btn_fg, activebackground=btn_active_bg,
                 width=25, height=2, command=jugar_partida_curta_normal).pack(pady=10)
 
-        tk.Button(root, text="Partida mitjana (9 punts)", font=btn_font,
+        tk.Button(root, text="Partida mitjana (6 punts)", font=btn_font,
                 bg=btn_bg, fg=btn_fg, activebackground=btn_active_bg,
                 width=25, height=2, command=jugar_partida_mitjana_normal).pack(pady=10)
 
-        tk.Button(root, text="Partida llarga (12 punts)", font=btn_font,
+        tk.Button(root, text="Partida llarga (9 punts)", font=btn_font,
                 bg=btn_bg, fg=btn_fg, activebackground=btn_active_bg,
                 width=25, height=2, command=jugar_partida_llarga_normal).pack(pady=10)
         
@@ -87,11 +87,11 @@ def crear_menu():
                 bg=btn_bg, fg=btn_fg, activebackground=btn_active_bg,
                 width=25, height=2, command=jugar_partida_curta_maquina).pack(pady=10)
 
-        tk.Button(root, text="Partida mitjana (9 punts)", font=btn_font,
+        tk.Button(root, text="Partida mitjana (6 punts)", font=btn_font,
                 bg=btn_bg, fg=btn_fg, activebackground=btn_active_bg,
                 width=25, height=2, command=jugar_partida_mitjana_maquina).pack(pady=10)
 
-        tk.Button(root, text="Partida llarga (12 punts)", font=btn_font,
+        tk.Button(root, text="Partida llarga (9 punts)", font=btn_font,
                 bg=btn_bg, fg=btn_fg, activebackground=btn_active_bg,
                 width=25, height=2, command=jugar_partida_llarga_maquina).pack(pady=10)
 
