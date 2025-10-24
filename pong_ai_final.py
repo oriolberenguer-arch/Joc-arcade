@@ -1,6 +1,9 @@
 import tkinter as tk
 import pong_ai
 import menu_pong
+import pygame
+
+pygame.init()
 
 
 def pantalla_final(guanyador, puntuacio_max):
@@ -32,4 +35,3 @@ def pantalla_final(guanyador, puntuacio_max):
 
 
     root.mainloop()
-
