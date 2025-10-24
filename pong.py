@@ -1,5 +1,7 @@
 import turtle
 import pong_final
+import pygame
+
 
 def jugar_pong(puntuacio_max):
     # Configuració de la pantalla
@@ -7,6 +9,10 @@ def jugar_pong(puntuacio_max):
     wn.title("Pong")
     wn.bgcolor("black")
     wn._root.attributes('-fullscreen', True)
+    wn.tracer(0)
+    wn._root.lift()
+    wn._root.attributes('-topmost', True) 
+    wn._root.after(500, lambda: wn._root.attributes('-topmost', False)) 
 
     # Configuració pales i pilota
     pala1 = turtle.Turtle()
@@ -46,6 +52,10 @@ def jugar_pong(puntuacio_max):
     punt.goto(0, 300)
     punt.write(f"Jugador 1:{puntuacio1}          Jugador 2:{puntuacio2}", align="center", font=("Courier", 36, "normal"))
 
+    # Configuració joystick
+    pygame.joystick.init()
+    joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
+
     # Funció per moure les pales
     def pala1_amunt():
         y = pala1.ycor()
@@ -71,15 +81,57 @@ def jugar_pong(puntuacio_max):
             y -= 20
             pala2.sety(y)
 
-    wn.listen()
-    wn.onkeypress(pala1_amunt, "w")
-    wn.onkeypress(pala1_avall, "s")
-    wn.onkeypress(pala2_amunt, "Up")
-    wn.onkeypress(pala2_avall, "Down")
 
     # Bucle principal
     x = True
+
     while x:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                break
+            elif event.type == pygame.JOYAXISMOTION:
+                axis_y1 = joysticks[0].get_axis(1)
+                axis_y2 = joysticks[1].get_axis(1)
+                if axis_y1 < -0.5:  # cap amunt (valor negatiu)
+                    pala1_amunt()
+                elif axis_y1 > 0.5:  # cap avall (valor positiu)
+                    pala1_avall()
+
+                if axis_y2 < -0.5:
+                    pala2_amunt()
+                elif axis_y2 > 0.5:
+                    pala2_avall()
+
+
+            elif event.type == pygame.JOYBUTTONDOWN:
+                if event.joy == 0:
+                    if event.button == 0 or event.button == 2:
+                        pala1_avall()
+                    elif event.button == 1 or event.button == 3:
+                        pala1_amunt()
+
+                elif event.joy == 1:
+                    if event.button == 0 or event.button == 2:
+                        pala2_avall()
+                    if event.button == 1 or event.button == 3:
+                        pala2_amunt()
+
+        axis_y1 = joysticks[0].get_axis(1)
+        axis_y2 = joysticks[1].get_axis(1)
+
+        if axis_y1 < -0.5:
+            pala1_amunt()
+        elif axis_y1 > 0.5:
+            pala1_avall()
+
+        if axis_y2 < -0.5:
+            pala2_amunt()
+        elif axis_y2 > 0.5:
+            pala2_avall()
+
+        pygame.time.Clock().tick(50)
+
         wn.update()
         bola.setx(bola.xcor() + bola.dx)
         bola.sety(bola.ycor() + bola.dy)
@@ -148,3 +200,5 @@ def jugar_pong(puntuacio_max):
             bola.dx *= -1.15
             bola.dy *= 1.15
             bola.setx(580)
+
+    wn.update()
