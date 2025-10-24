@@ -1,11 +1,13 @@
 import tkinter as tk
 import pong_ai
 import pong
-
+import pygame
 #Fem una variable de que estem al menú
 menu = True
-
 dificultat = 0
+
+pygame.init()
+pygame.joystick.init()
 
 
 def crear_menu():
@@ -63,6 +65,7 @@ def crear_menu():
 
     # Crear botons
     # Creem una funció perquè el jugador trii la duració (1vs1)
+    global triar_duracio_normal
     def triar_duracio_normal():
         # Primer fem desaparèixer els botons que hi havien 
         boto_normal.pack_forget()
@@ -96,8 +99,6 @@ def crear_menu():
                 width=34, height=3, command=jugar_partida_llarga_maquina).pack(pady=15)
 
     # Creem una funció per triar la dificultat en cas que el jugador vulgui jugar contra la màquina
-
-
     def triar_dificultat():
         boto_normal.pack_forget()
         boto_maquina.pack_forget()
@@ -140,7 +141,19 @@ def crear_menu():
     boto_maquina.pack(pady=20)
 
 
-    # Això ha d'estar al final
+    for event in pygame.event.get():
+        print("S'ha entrat en el bucle")
+        if event.type == pygame.QUIT:
+            break
+        elif event.type == pygame.JOYBUTTONDOWN:
+            print("S'ha clicat el botó, funciona!")  
+            triar_duracio_normal()
+        else:
+            print("Else") 
+
+   # Això ha d'estar al final
     root.mainloop()
+
 crear_menu()
+
 
