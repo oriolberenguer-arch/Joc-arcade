@@ -1,6 +1,7 @@
 import turtle
 import random
 import pong_ai_final
+import pygame
 
 def jugar_pong(puntuacio_max, dificultat):
     # Configuració de la pantalla
@@ -47,6 +48,10 @@ def jugar_pong(puntuacio_max, dificultat):
     punt.goto(0, 300)
     punt.write(f"Jugador 1:{puntuacio1}          Jugador 2:{puntuacio2}", align="center", font=("Courier", 36, "normal"))
 
+    # Configuració joystick
+    pygame.joystick.init()
+    joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
+
     # Funció per moure les pales
     def pala1_amunt():
         y = pala1.ycor()
@@ -80,10 +85,38 @@ def jugar_pong(puntuacio_max, dificultat):
     # Bucle principal
     x = True
     while x:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                break
+            elif event.type == pygame.JOYAXISMOTION:
+                axis_y1 = joysticks[0].get_axis(1)
+                if axis_y1 < -0.5:  # cap amunt (valor negatiu)
+                    pala1_amunt()
+                elif axis_y1 > 0.5:  # cap avall (valor positiu)
+                    pala1_avall()
+
+            elif event.type == pygame.JOYBUTTONDOWN:
+                if event.joy == 0:
+                    if event.button == 0 or event.button == 2:
+                        pala1_avall()
+                    elif event.button == 1 or event.button == 3:
+                        pala1_amunt()
+
+        axis_y1 = joysticks[0].get_axis(1)
+
+        if axis_y1 < -0.5:
+            pala1_amunt()
+        elif axis_y1 > 0.5:
+            pala1_avall()
+
+        pygame.time.Clock().tick(50)
+
+
+
         wn.update()
         bola.setx(bola.xcor() + bola.dx)
-        bola.sety(bola.ycor() + bola.dy)
-
+        bola.sety(bola.ycor() + bola.dy)        
 
         # Moviment de la IA
         if bola.xcor() > 100:  # Només quan la pilota està a la seva meitat
@@ -157,4 +190,3 @@ def jugar_pong(puntuacio_max, dificultat):
             bola.dx *= -1.15
             bola.dy *= 1.15            
             bola.setx(580)
-
