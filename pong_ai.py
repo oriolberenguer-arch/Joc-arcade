@@ -1,91 +1,85 @@
-import turtle
 import random
 import pong_ai_final
 import pygame
+pygame.init()
+pygame.joystick.init()
+joysticks = []
+
+for i in range(pygame.joystick.get_count()):
+    joystick = pygame.joystick.Joystick(i)
+    joystick.init()
+    joysticks.append(joystick)
 
 def jugar_pong(puntuacio_max, dificultat):
     # Configuració de la pantalla
-    wn = turtle.Screen()
-    wn.title("Pong")
-    wn.bgcolor("black")
-    wn._root.attributes('-fullscreen', True)
+    pygame.init()
+    pygame.joystick.init()
+    pantalla = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    pantalla.fill((0, 0, 0))
+    pygame.display.set_caption("Pong")
+    pygame.display.flip()
+
+    amplada, altura = pygame.display.get_surface().get_size()
 
     # Configuració pales i pilota
-    pala1 = turtle.Turtle()
-    pala1.speed(0)
-    pala1.shape("square")
-    pala1.color("white")
-    pala1.shapesize(stretch_wid=7.5, stretch_len=0.75)
-    pala1.penup()
-    pala1.goto(-600, 0)
+    pala1 = pygame.Rect(0, 0, 15, 150)
+    pala1.center = (100, altura // 2)
+    pygame.draw.rect(pantalla, (255, 255, 255), pala1)
+    pygame.display.flip()
 
-    pala2 = turtle.Turtle()
-    pala2.speed(0)
-    pala2.shape("square")
-    pala2.color("white")
-    pala2.shapesize(stretch_wid=7.5, stretch_len=0.75)
-    pala2.penup()
-    pala2.goto(600, 0)
+    pala2 = pygame.Rect(0, 0, 15, 150)
+    pala2.center = (amplada - 100, altura // 2)
+    pygame.draw.rect(pantalla, (255, 255, 255), pala2)
+    pygame.display.flip()
 
-    bola = turtle.Turtle()
-    bola.speed(0)
-    bola.shape("square")
-    bola.color("white")
-    bola.penup()
-    bola.goto(0, 0)
-    bola.dx = 3.5
-    bola.dy = 3.5
-    bola.shapesize(stretch_wid=1.35, stretch_len=1.35)
+    bola = pygame.Rect(0, 0, 27, 27)
+    bola.center = (amplada // 2, altura // 2)
+    bola_dx = 3.5
+    bola_dy = 3.5
+    pygame.draw.rect(pantalla, (255, 255, 255), bola)
+    pygame.display.flip()
 
     # Puntuació
+    pygame.font.init()
     puntuacio1 = 0
     puntuacio2 = 0
-    punt = turtle.Turtle()
-    punt.speed(0)
-    punt.color("white")
-    punt.penup()
-    punt.hideturtle()
-    punt.goto(0, 300)
-    punt.write(f"Jugador 1:{puntuacio1}          Jugador 2:{puntuacio2}", align="center", font=("Courier", 36, "normal"))
+    font = pygame.font.SysFont("courier", 36)
+    texto = font.render(f"Jugador 1: {puntuacio1}          Jugador 2: {puntuacio2}", True, (255, 255, 255))
+    text_rect = texto.get_rect(center=(amplada // 2, 50))
+    pantalla.blit(texto, text_rect)
+    #pygame.display.flip()
 
-    # Configuració joystick
-    pygame.joystick.init()
-    joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
 
     # Funció per moure les pales
     def pala1_amunt():
-        y = pala1.ycor()
-        if y < 310:
-            y += 20
-            pala1.sety(y)
+        pala1.y -= 20
+        if pala1.top < 0:
+            pala1.top = 0
+
 
     def pala1_avall():
-        y = pala1.ycor()
-        if y > -300:
-            y -= 20
-            pala1.sety(y)
+        pala1.y += 20
+        if pala1.bottom > altura:
+            pala1.bottom = altura
 
     def pala2_amunt():
-        y = pala2.ycor()
-        if y < 310:
-            y += 20
-            pala2.sety(y)
+        pala2.y -= 20  
+        if pala2.top < 0:
+            pala2.top = 0
 
     def pala2_avall():
-        y = pala2.ycor()
-        if y > -300:
-            y -= 20
-            pala2.sety(y)
+        pala2.y += 20 
+        if pala2.bottom > altura:
+            pala2.bottom = altura
 
-    wn.listen()
-    wn.onkeypress(pala1_amunt, "w")
-    wn.onkeypress(pala1_avall, "s")
 
 
     # Bucle principal
+    if pygame.joystick.get_count() > 0:
+        joystick = pygame.joystick.Joystick(0)
+        joystick.init()
     x = True
     while x:
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 break
@@ -95,6 +89,7 @@ def jugar_pong(puntuacio_max, dificultat):
                     pala1_amunt()
                 elif axis_y1 > 0.5:  # cap avall (valor positiu)
                     pala1_avall()
+                    
 
             elif event.type == pygame.JOYBUTTONDOWN:
                 if event.joy == 0:
@@ -102,6 +97,8 @@ def jugar_pong(puntuacio_max, dificultat):
                         pala1_avall()
                     elif event.button == 1 or event.button == 3:
                         pala1_amunt()
+            else:
+                print("peruan")
 
         axis_y1 = joysticks[0].get_axis(1)
 
@@ -113,80 +110,104 @@ def jugar_pong(puntuacio_max, dificultat):
         pygame.time.Clock().tick(50)
 
 
+        pantalla.fill((0,0,0))
+        pygame.draw.rect(pantalla, (255,255,255), pala1)
+        pygame.draw.rect(pantalla, (255,255,255), pala2)
+        pygame.draw.rect(pantalla, (255,255,255), bola)
+        # Actualitzar marcador cada frame
+        texto = font.render(f"Jugador 1: {puntuacio1}          Jugador 2: {puntuacio2}", True, (255, 255, 255))
+        text_rect = texto.get_rect(center=(amplada // 2, 50))
 
-        wn.update()
-        bola.setx(bola.xcor() + bola.dx)
-        bola.sety(bola.ycor() + bola.dy)        
+        pantalla.blit(texto, text_rect)
+        pygame.display.flip()
+
+
+        pygame.time.Clock().tick(50)
+        bola.x += bola_dx
+        bola.y += bola_dy    
 
         # Moviment de la IA
-        if bola.xcor() > 100:  # Només quan la pilota està a la seva meitat
-            error = random.randint(-dificultat, dificultat) # Com més gran, més fàcil
-            if bola.ycor() > pala2.ycor() + 10 + error:
-                pala2.sety(pala2.ycor() + 12)
-            elif bola.ycor() < pala2.ycor() - 10 + error:
-                pala2.sety(pala2.ycor() - 12)
+        if bola.x > 100:
+            error = random.randint(-dificultat, dificultat)  # com més gran, més fàcil
+            if bola.y > pala2.y + 10 + error:
+                pala2.y += 12 
+            elif bola.y < pala2.y - 10 + error:
+                pala2.y -= 12
 
         # Rebot amb parets superior/inferior
-        if bola.ycor() > 370:
-            bola.sety(370)
-            bola.dy *= -1
-        if bola.ycor() < -360:
-            bola.sety(-360)
-            bola.dy *= -1
+        if bola.top <= 0 or bola.bottom >= altura:
+            bola_dy = -bola_dy
+
+        if bola.left <= 0 or bola.right >= amplada:
+            bola.center = (amplada // 2, altura // 2)
+            bola_dx *= -1
 
         # Punt per jugador 1
-        if bola.xcor() > 660:
+        if bola.right >= (amplada-20):
             puntuacio1 += 1
-            bola.setx(660)
-            bola.dx *= -1
-            # Fem que cada ronda la pilota vagi més ràpida
-            if bola.dx > 0:
-                bola.dx = 3.5 + (puntuacio1 + puntuacio2)/4
-                bola.dy = 3.5 + (puntuacio1 + puntuacio2)/4
+            
+            velocitat_base = 3.5
+            augment = (puntuacio1 + puntuacio2) / 4
+            bola_dx = -bola_dx
+            
+            if bola_dx > 0:
+                bola_dx = velocitat_base + augment
+                bola_dy = velocitat_base + augment
             else:
-                bola.dx = -3.5 - (puntuacio1 + puntuacio2)/4
-                bola.dy = -3.5 - (puntuacio1 + puntuacio2)/4
-            punt.clear()
-            punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2),
-                       align="center", font=("Courier", 36, "normal"))
-            bola.goto(0, 0)
+                bola_dx = -velocitat_base - augment
+                bola_dy = -velocitat_base - augment
+            
+            texto = font.render(f"Jugador 1: {puntuacio1}          Jugador 2: {puntuacio2}", True, (255, 255, 255))
+            text_rect = texto.get_rect(center=(amplada // 2, 50))
+            bola.center = (amplada // 2, altura // 2)
 
         # Punt per jugador 2
-        if bola.xcor() < -670:
+        if bola.left <= 20:
             puntuacio2 += 1
-            bola.setx(-670)
-            bola.dx *= -1
-            # Fem que cada ronda la pilota vagi més ràpida
-            if bola.dx > 0:
-                bola.dx = 3.5 + (puntuacio1 + puntuacio2)/4
-                bola.dy = 3.5 + (puntuacio1 + puntuacio2)/4
+
+                        
+            velocitat_base = 3.5
+            augment = (puntuacio1 + puntuacio2) / 4
+            bola_dx = -bola_dx
+            
+            if bola_dx > 0:
+                bola_dx = velocitat_base + augment
+                bola_dy = velocitat_base + augment
             else:
-                bola.dx = -3.5 - (puntuacio1 + puntuacio2)/4
-                bola.dy = -3.5 - (puntuacio1 + puntuacio2)/4
-            punt.clear()
-            punt.write("Jugador 1:{}          Jugador 2:{}".format(puntuacio1, puntuacio2),
-                       align="center", font=("Courier", 36, "normal"))
-            bola.goto(0, 0)
+                bola_dx = -velocitat_base - augment
+                bola_dy = -velocitat_base - augment
+            
+            # Actualizar marcador
+            texto = font.render(f"Jugador 1: {puntuacio1}          Jugador 2: {puntuacio2}", True, (255, 255, 255))
+            text_rect = texto.get_rect(center=(amplada // 2, 50))
+            bola.center = (amplada // 2, altura // 2)
 
         # Comprovació final del joc
         if puntuacio1 == puntuacio_max or puntuacio2 == puntuacio_max:
-            bola.dx = 0
-            bola.dy = 0
-            punt.goto(0, 0)
-            wn.clear()
+            bola_dx = 0
+            bola_dy = 0
+
+            pantalla.fill((0, 0, 0))
+            #pygame.display.flip()
+
             if puntuacio1 == puntuacio_max:
                 pong_ai_final.pantalla_final("1", puntuacio_max)
             else:
                 pong_ai_final.pantalla_final("2", puntuacio_max)
+
             x = False
 
-        # Xocs entre pala i bola
-        if bola.xcor() < -580 and pala1.ycor() - 50 < bola.ycor() < pala1.ycor() + 50:
-            bola.dx *= -1.15
-            bola.dy *= 1.15
-            bola.setx(-580)
+        # Xoc pilota - pala1
+        if bola.colliderect(pala1):
+            bola_dx *= -1.15
+            bola_dy *= 1.15
+            bola.left = pala1.right 
 
-        elif bola.xcor() > 580 and pala2.ycor() - 50 < bola.ycor() < pala2.ycor() + 50:
-            bola.dx *= -1.15
-            bola.dy *= 1.15            
-            bola.setx(580)
+        # Xoc pilota - pala2
+        elif bola.colliderect(pala2):
+            bola_dx *= -1.15
+            bola_dy *= 1.15
+            bola.right = pala2.left 
+
+
+    pygame.display.flip()
