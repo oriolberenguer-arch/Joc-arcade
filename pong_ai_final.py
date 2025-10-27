@@ -32,19 +32,16 @@ def pantalla_final(guanyador, puntuacio_max):
 
     running = True
     while running: 
-        print("S'ha entrat en el bucle")       
         for boto in [boto_reiniciar, boto_menu]:
             pygame.draw.rect(pantalla, "white", boto["rect"])
             text = pygame.font.SysFont("Courier", 28, bold=True).render(boto["text"], True, "black")
             pantalla.blit(text, text.get_rect(center=boto["rect"].center))
-            print("S'han dibuixat els botons")
 
 
         pygame.display.flip()  # <-- Actualitza la pantalla
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                print("S'ha tancat la palanca")
                 running = False
             elif event.type == pygame.JOYBUTTONDOWN:
                 print("Boto detectat")
@@ -54,10 +51,8 @@ def pantalla_final(guanyador, puntuacio_max):
                 elif event.button == 0 or event.button == 2:
                     tornar_menu()
                     running = False
-            else:
-                print("else")
+
 
         pygame.time.Clock().tick(60)
-    print("cfghjk")
 
     #pygame.quit()
