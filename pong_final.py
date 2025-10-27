@@ -46,7 +46,6 @@ def pantalla_final(guanyador, puntuacio_max):
                         reiniciar()
                         running = False
                     elif event.button == 0 or event.button == 2:
-                        print("tornaar al menu")
                         running = False
                         tornar_menu()
         pygame.display.flip()
