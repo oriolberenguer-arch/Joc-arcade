@@ -81,8 +81,8 @@ def jugar_pong(puntuacio_max):
             if event.type == pygame.QUIT:
                 break
             elif event.type == pygame.JOYAXISMOTION:
-                axis_y1 = joysticks[0].get_axis(1)
-                axis_y2 = joysticks[1].get_axis(1)
+                axis_y1 = joysticks[1].get_axis(1)
+                axis_y2 = joysticks[0].get_axis(1)
                 if axis_y1 < -0.5:  # cap amunt (valor negatiu)
                     pala1_amunt()
                 elif axis_y1 > 0.5:  # cap avall (valor positiu)
@@ -95,20 +95,20 @@ def jugar_pong(puntuacio_max):
 
 
             elif event.type == pygame.JOYBUTTONDOWN:
-                if event.joy == 0:
+                if event.joy == 1:
                     if event.button == 0 or event.button == 2:
                         pala1_avall()
                     elif event.button == 1 or event.button == 3:
                         pala1_amunt()
 
-                elif event.joy == 1:
+                elif event.joy == 0:
                     if event.button == 0 or event.button == 2:
                         pala2_avall()
                     if event.button == 1 or event.button == 3:
                         pala2_amunt()
 
-        axis_y1 = joysticks[0].get_axis(1)
-        axis_y2 = joysticks[1].get_axis(1)
+        axis_y1 = joysticks[1].get_axis(1)
+        axis_y2 = joysticks[0].get_axis(1)
 
         if axis_y1 < -0.5:
             pala1_amunt()
@@ -218,4 +218,3 @@ def jugar_pong(puntuacio_max):
 
 
     pygame.display.flip()
-
