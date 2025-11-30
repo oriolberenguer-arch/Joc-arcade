@@ -97,8 +97,6 @@ def jugar_pong(puntuacio_max, dificultat):
                         pala1_avall()
                     elif event.button == 1 or event.button == 3:
                         pala1_amunt()
-            else:
-                print("peruan")
 
         axis_y1 = joysticks[1].get_axis(1)
 
